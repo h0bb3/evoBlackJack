@@ -10,12 +10,6 @@ public class Hand {
         m_cards.add(a_card);
     }
 
-    public void showAllCards() {
-        for (Card c : m_cards) {
-            c.show();
-        }
-    }
-
     int getScore() {
         int cardScores[] = {
                 2, 3, 4, 5, 6, 7, 8, 9, 10, 10 ,10 ,10, 11

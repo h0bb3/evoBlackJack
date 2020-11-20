@@ -8,8 +8,6 @@ public class Dealer {
     void play(Player a_player) {
         startGame(a_player);
 
-        printStatus(a_player);
-
         playGame(a_player);
 
         endGame(a_player);
@@ -45,6 +43,8 @@ public class Dealer {
         giveCardToMyself();
         giveCardTo(a_player);
         giveCardToMyself();
+
+        printStatus(a_player);
     }
 
 

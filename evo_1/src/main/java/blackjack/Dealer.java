@@ -15,11 +15,6 @@ public class Dealer {
         endGame(a_player);
     }
 
-    private void printStatus(Player a_player) {
-        System.out.println(this);
-        System.out.println(a_player);
-    }
-
     private void endGame(Player a_player) {
         if (a_player.isBust()) {
             printPlayerBust();
@@ -73,17 +68,20 @@ public class Dealer {
 
     private void giveCardTo(Player a_player) {
         Card c = m_deck.getTopCard();
-        c.show();
         a_player.addCard(c);
     }
 
     private void giveCardToMyself() {
         Card c = m_deck.getTopCard();
-        c.show();
         m_hand.addCard(c);
     }
 
     // Printing operations below
+
+    private void printStatus(Player a_player) {
+        System.out.println(this);
+        System.out.println(a_player);
+    }
 
     private void printResult(Player a_player) {
         printResultSeparator();

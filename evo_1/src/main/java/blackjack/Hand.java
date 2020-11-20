@@ -18,17 +18,12 @@ public class Hand {
         int score = 0;
 
         for(Card c : m_cards) {
-            if (c.getValue() != Card.Value.Hidden)
-            {
-                score += cardScores[c.getValue().ordinal()];
-            }
+            score += cardScores[c.getValue().ordinal()];
         }
 
         if (score > 21) {
-            for(Card c : m_cards)
-            {
-                if (c.getValue() == Card.Value.Ace && score > 21)
-                {
+            for(Card c : m_cards) {
+                if (c.getValue() == Card.Value.Ace && score > 21) {
                     score -= 10;
                 }
             }

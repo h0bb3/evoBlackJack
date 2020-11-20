@@ -6,6 +6,43 @@ public class Dealer {
     Deck m_deck;
 
     void play(Player a_player) {
+        startGame(a_player);
+
+        printStatus(a_player);
+
+        playGame(a_player);
+
+        endGame(a_player);
+    }
+
+    private void printStatus(Player a_player) {
+        System.out.println(this);
+        System.out.println(a_player);
+    }
+
+    private void endGame(Player a_player) {
+        if (a_player.isBust()) {
+            printPlayerBust();
+        } else if (isBust()) {
+            printDealerIsBust();
+        } else {
+            printResult(a_player);
+        }
+    }
+
+    private boolean isBust() {
+        return m_hand.getScore() < 21;
+    }
+
+
+    private void playGame(Player a_player) {
+        playersTurn(a_player);
+        if (!a_player.isBust()) {
+            myTurn();
+        }
+    }
+
+    private void startGame(Player a_player) {
         m_deck = new Deck();
         m_deck.shuffle();
 
@@ -13,24 +50,6 @@ public class Dealer {
         giveCardToMyself();
         giveCardTo(a_player);
         giveCardToMyself();
-
-        System.out.println(this);
-        System.out.println(a_player);
-
-        playersTurn(a_player);
-
-        if (a_player.getScore() > 21) {
-            printPlayerBust();
-        } else {
-
-            myTurn();
-
-            if (m_hand.getScore()> 21) {
-                printDealerIsBust();
-            } else {
-                printResult(a_player);
-            }
-        }
     }
 
 

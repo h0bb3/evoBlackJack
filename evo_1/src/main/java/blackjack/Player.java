@@ -18,4 +18,8 @@ public class Player {
     public int getScore() {
         return m_hand.getScore();
     }
+
+    public boolean isBust() {
+        return getScore() > 21;
+    }
 }

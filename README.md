@@ -37,9 +37,14 @@ To aid in our design we will try to assign responsibilities to objects so that t
  
 These two rules of thumb assures that we maximise two important aspects of object orientation: lowering the semantic gap between a problem (requirements) and the solution (program code), and encapsulation. Lowering the semantic gap in this case would mean that if we understand how to play black jack we should find few surprises in the actual design and implementation of the game. The design should reflect and represent reality.
 
-Encapsulation is another major advantage of OO. To put it simply we want each object to be responsible for dealing with its own information and other objects should not be able to change this information. This will often make it easier to understand the design and implementation. It also lowers the risk of bugs as rules for operating on the data can be collected in one place and we can ensure that the rules are executed. Good encapsulation also makes it easier to reuse parts of our design and implementation in other projects.
+Encapsulation is a general design goal in most methodologies/languages. To put it simply we want each object to be responsible for dealing with its own information and other objects should not be able to change this information. This will often make it easier to understand the design and implementation, i.e. the functionality and data needed to perform that functionality are put together. It also lowers the risk of bugs as rules for operating on the data can be collected in one place and we can ensure that the rules are executed. Good encapsulation also makes it easier to reuse parts of our design and implementation in other projects.
+
+Sometimes these two rules can be conflicting, in such cases we will generally favor encapsulation.
  
- Looking at the behaviors above we can construct some sequence diagrams to clarify the needed behavior. A sequence diagram shows how objects collaborate to achive some goal. In this case we will create sequence diagrams that reflect primarily reflect reality.
+Looking at the requirements above we can construct some sequence diagrams to clarify the needed behavior. A sequence diagram shows how objects collaborate to achive some goal by sending messages to eachother.
  
- In the first step the Dealer interacts with two types of objects in real life: the Deck type and Card type. We can note that the Dealer will interact with one Deck object but serveral Card objects.
+ ### Shuffling the Deck
+ In the first step the Dealer interacts with two types of objects in real life: the Deck type and Card type. We can note that the Dealer will interact with one Deck object but serveral Card objects. A simple way of shuffling a deck is to take a random card from the deck and placing it on top of the deck. We can simply let the Dealer do this (as in real life).
+ ![](https://app.genmymodel.com/api/projects/_-kk90CqgEeuxZMUIY-ihGw/diagrams/_OSvpEAzPEDmYaKiOUqCuEA/jpeg)
+ 
  

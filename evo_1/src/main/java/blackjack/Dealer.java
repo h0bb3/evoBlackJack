@@ -56,7 +56,7 @@ public class Dealer {
     }
 
     private boolean wantsToHit() {
-        return m_hand.getScore() < 17 && m_hand.getScore() < 21;
+        return m_hand.getScore() < 17 && !isBust();
     }
 
     private void playersTurn(Player a_player) {
@@ -68,11 +68,13 @@ public class Dealer {
 
     private void giveCardTo(Player a_player) {
         Card c = m_deck.getTopCard();
+        c.show();
         a_player.addCard(c);
     }
 
     private void giveCardToMyself() {
         Card c = m_deck.getTopCard();
+        c.show();
         m_hand.addCard(c);
     }
 

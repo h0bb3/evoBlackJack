@@ -11,9 +11,19 @@ public class Hand {
     }
 
     int getScore() {
-        int cardScores[] = {
-                2, 3, 4, 5, 6, 7, 8, 9, 10, 10 ,10 ,10, 11
-        };
+        int cardScores[] = new int [Card.Value.values().length];
+        cardScores[Card.Value.Ace.ordinal()] = 11;
+        cardScores[Card.Value.King.ordinal()] = cardScores[Card.Value.Queen.ordinal()] = cardScores[Card.Value.Knight.ordinal()] = 10;
+        cardScores[Card.Value.Ten.ordinal()] = 10;
+        cardScores[Card.Value.Nine.ordinal()] = 9;
+        cardScores[Card.Value.Eight.ordinal()] = 8;
+        cardScores[Card.Value.Seven.ordinal()] = 7;
+        cardScores[Card.Value.Six.ordinal()] = 6;
+        cardScores[Card.Value.Five.ordinal()] = 5;
+        cardScores[Card.Value.Four.ordinal()] = 4;
+        cardScores[Card.Value.Three.ordinal()] = 3;
+        cardScores[Card.Value.Two.ordinal()] = 2;
+        cardScores[Card.Value.Hidden.ordinal()] = 0;
 
         int score = 0;
 

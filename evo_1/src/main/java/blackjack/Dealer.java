@@ -39,10 +39,10 @@ public class Dealer {
         m_deck = new Deck();
         m_deck.shuffle();
 
-        giveCardTo(a_player);
-        giveCardToMyself();
-        giveCardTo(a_player);
-        giveCardToMyself();
+        dealCardTo(a_player);
+        dealCardTo();
+        dealCardTo(a_player);
+        dealCardTo();
 
         printStatus(a_player);
     }
@@ -50,7 +50,7 @@ public class Dealer {
 
     private void myTurn() {
         while (wantsToHit()) {
-            giveCardToMyself();
+            dealCardTo();
             printDealerHit();
         }
     }
@@ -61,18 +61,18 @@ public class Dealer {
 
     private void playersTurn(Player a_player) {
         while(a_player.wantsToHit()) {
-            giveCardTo(a_player);
+            dealCardTo(a_player);
             printPlayerHit(a_player);
         }
     }
 
-    private void giveCardTo(Player a_player) {
+    private void dealCardTo(Player a_player) {
         Card c = m_deck.getTopCard();
         c.show();
         a_player.addCard(c);
     }
 
-    private void giveCardToMyself() {
+    private void dealCardTo() {
         Card c = m_deck.getTopCard();
         c.show();
         m_hand.addCard(c);

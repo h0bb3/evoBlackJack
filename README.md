@@ -60,6 +60,8 @@ When we have the candidate classes we often get a lot of classes and we need to 
  
  Based on the analysis above we can construct a simple class diagram that visually shows the text above.
  
+ ![](https://github.com/tobias-dv-lnu/evoBlackJack/raw/main/img/domain_model.png)
+ 
 
 ## Design
 We will now design an object oriented program based on these rules. To aid in this we will use UML sequence and class diagrams. We will then implement the design in Java.

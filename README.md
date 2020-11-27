@@ -11,7 +11,7 @@ The score of a hand (the cards assigned to the Dealer or Player) is computed by 
 
 The objective of the game is to have a hand with a score as close to, but not over 21. If the score is over 21 the hand is bust.
 
-### Start Phase
+### Starting
  1. The Dealer gets a new deck of cards and shuffles them randomly without showing the card face to anyone.
  2. The Dealer deals one card from the top of the deck, shows the card and gives it to the Player (the card is now included in the Player's hand).
  3. The Dealer deals one card from the top of the deck, shows the card and gives it to the herself (the card is now included in the Dealers's hand)
@@ -19,13 +19,47 @@ The objective of the game is to have a hand with a score as close to, but not ov
  5. The Dealer deals one card from the top of the deck, shows the card and gives it to the herself (the card is now included in the Dealers's hand)
  6. The phase ends with both the Dealer and Player having two cards in their hand with the face value visible to all players. The score of each hand can now be calculated.
  
-### Players Phase
+### Player Plays
  1. While the Player is not bust the Dealer asks the player to hit or stand. If the Player hits the Dealer deals one card from the top of the deck, shows the card and gives it to the Player (the card is now included in the Player's hand).
  2. If the player is bust the Dealer wins the game, otherwise the game enters the Dealers Phase.
  
-### Dealers Phase
+### Dealer Plays
  1. While the Dealer is not bust and the Dealers score is <17 the dealer must Hit: The Dealer deals one card from the top of the deck, shows the card and gives it to the herself (the card is now included in the Dealers's hand)
  2. If the Dealer is bust the Player wins the game, otherwise the game is won by the one who has the score closest to 21. If Dealer and Player have an equal score the Dealer wins.
+ 
+## Analysis
+The first step is to find candidate classes and connect these via associations. In this step it is important to NOT think about software stuff, rather we should focus on the problem area. One technique to find candidate classes is to look for nouns in the text and problem description. Using this technique we can find:
+
+ * Dealer
+ * Deck
+ * Player
+ * Card
+ * Score
+ * Color
+ * Value
+ * 2..10, Knight, Queen, King, Ace
+ * Hearts, Clubs, Diamonds, Spades
+ * (Black Jack) Game
+ 
+When we have the candidate classes we often get a lot of classes and we need to discard some of them and keep some of them. We should keep classes that seem to be more complicated than a single value/datatype or have some advanced behavior. A rule of thumb is that a class should contain/have at least one variable type of data that it manages.
+
+ * Dealer - handles the deck, deals cards and has a hand, there is onbly one dealer -> Keep
+ * Deck - contains the cards -> Keep
+ * Player - recieves cards and has a hand of cards, there is only one player (currently) -> Keep
+ * Card - has a color and value, we have many card objects, used for dealing and calculating score -> Keep
+ * Score - computed by the cards in a hand, probably an integer value -> Discard
+ * Color - A property of a card, there are four kinds of colors: Hearts, Clubs, Diamonds, Spades, the color of a card is immutable and should never change -> Discard
+ * Value - A property of a card, there are 13 kinds of values: 2..10, Knight, Queen, King, Ace, the value of a card is immutable and should never change -> Discard
+ * 2..10, Knight, Queen, King, Ace - The individual values, these are more like a primitive datatype: there is only one single value "2" that will never change -> Discard
+ * Hearts, Clubs, Diamonds, Spades - The individual colors, these are more like a primitive datatype: there is only one single value "hearts" that will never change -> Discard
+ * (Black Jack) Game - The entire game, contains everything, this is what we are analyzing/designing/implementing. There is only one Game. - Discard
+ 
+ It is quite easy to understand that Dealer, Deck, Player and Card are central koncepts in playing Black Jack. We can also see that Score is simply a calculation. The colors and values are a bit more dubios. I choose to discard them mostly as they have no behavior and encompass only a single value, they seem to be more like a primitive datatype. The actual colors and values (Hears, Knight etc) are more like constant values i.e. the counterpart to the number "1".
+ 
+ Finally the reason for discarding the Game concept is based on the fact that this is what we are trying to develop in itself, i.e. it is the whole analysis/design/implementation, i.e. it is the model(s) itself. If we where do model several different types of games, or run several games (with different dealers and players) at once it would make more sense to include it.
+ 
+ Based on the analysis above we can construct a simple class diagram that visually shows the text above.
+ 
 
 ## Design
 We will now design an object oriented program based on these rules. To aid in this we will use UML sequence and class diagrams. We will then implement the design in Java.

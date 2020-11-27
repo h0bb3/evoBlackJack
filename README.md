@@ -46,22 +46,29 @@ When we have the candidate classes we often get a lot of classes and we need to 
  * Dealer - handles the deck, deals cards and has a hand, there is onbly one dealer -> Keep
  * Deck - contains the cards -> Keep
  * Player - recieves cards and has a hand of cards, there is only one player (currently) -> Keep
- * Card - has a color and value, we have many card objects, used for dealing and calculating score -> Keep
+ * Card - has a color and value, we have many card objects, used for dealing and calculating score, a card is hidden by default and then no one can see the color or value -> Keep
  * Score - computed by the cards in a hand, probably an integer value -> Discard
  * Color - A property of a card, there are four kinds of colors: Hearts, Clubs, Diamonds, Spades, the color of a card is immutable and should never change -> Discard
  * Value - A property of a card, there are 13 kinds of values: 2..10, Knight, Queen, King, Ace, the value of a card is immutable and should never change -> Discard
  * 2..10, Knight, Queen, King, Ace - The individual values, these are more like a primitive datatype: there is only one single value "2" that will never change -> Discard
  * Hearts, Clubs, Diamonds, Spades - The individual colors, these are more like a primitive datatype: there is only one single value "hearts" that will never change -> Discard
- * (Black Jack) Game - The entire game, contains everything, this is what we are analyzing/designing/implementing. There is only one Game. - Discard
+ * Black Jack Game - The entire game, is played by one Dealer and one Player everything, this is what we are analyzing/designing/implementing. There is only one Game. - Keep
  
  It is quite easy to understand that Dealer, Deck, Player and Card are central koncepts in playing Black Jack. We can also see that Score is simply a calculation. The colors and values are a bit more dubios. I choose to discard them mostly as they have no behavior and encompass only a single value, they seem to be more like a primitive datatype. The actual colors and values (Hears, Knight etc) are more like constant values i.e. the counterpart to the number "1".
  
- Finally the reason for discarding the Game concept is based on the fact that this is what we are trying to develop in itself, i.e. it is the whole analysis/design/implementation, i.e. it is the model(s) itself. If we where do model several different types of games, or run several games (with different dealers and players) at once it would make more sense to include it.
+ Finally the reason for keeping the Game concept is to clearly show that there is only one Dealer and one Player playing theg ame. Otherwise it could be considered the entirety of what we are trying to develop in itself, i.e. it is the whole analysis/design/implementation, i.e. it is the model(s) itself. In general such classes are not that useful as they tend to just contain everything. Another aspect to consider is if we where do model several different types of games, or run several games (with different dealers and players) at once.
  
  Based on the analysis above we can construct a simple class diagram that visually shows the text above.
  
  ![](https://github.com/tobias-dv-lnu/evoBlackJack/raw/main/img/domain_model.png)
  
+ In this model we try to express the game under analysis as clearly and as consisely as possible. In reality any object can have a relation to any other object, but we limit our selves to relations that must be kept for some time. For example, the dealer uses the same deck of cards throughout the game, the deck contains all cards (until one is removed), the hands contans all cards that are dealt to them for the whole game etc. While we know that a dealer deals a card, this is just an action that happens and we do not need to remember this for some time (actually we can know that the dealer has delt a card by looking at the cards in either hand, so it would also be redundant to show this as an association).
+ 
+ To test our model we could construct an object diagram showing the exact objects and relations in some specific situation of the game. In this case we show the state after the start of the game where the player and dealer have 2 cards each. We should then able to calculate the score of the dealer and player i.e. the model must support us knowing what card belongs to which hand.
+ 
+  ![](https://github.com/tobias-dv-lnu/evoBlackJack/raw/main/img/domain_model_objects.png)
+ 
+ In this case we can clearly calculate the scores by using the information in the diagram. In this case the only other actions that will happen would add more cards to either hand so clearly the class diagram would support these situations too.
 
 ## Design
 We will now design an object oriented program based on these rules. To aid in this we will use UML sequence and class diagrams. We will then implement the design in Java.

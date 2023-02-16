@@ -12,7 +12,7 @@ public class Player {
     }
 
     public boolean wantsToHit() {
-        return m_hand.getScore() < 21;
+        return m_hand.getScore() < 19;
     }
 
     public int getScore() {

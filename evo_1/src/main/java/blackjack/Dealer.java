@@ -24,7 +24,7 @@ public class Dealer {
     }
 
     private boolean isBust() {
-        return m_hand.getScore() < 21;
+        return m_hand.getScore() > 21;
     }
 
 
